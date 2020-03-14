@@ -133,7 +133,7 @@ replicate' (n, x) = x : replicate' (n-1, x)
 --    X = [a,a,b,b,c,c,c,c,d,d]
 duplicate :: [a] -> [a]
 duplicate [] = []
-duplicate (x:xs) = x:x:duplicate xs
+duplicate (x:xs) = x : x : duplicate xs
 
 -- 1.15 (**) Duplicate the elements of a list a given number of times.
 --    Example:
@@ -145,7 +145,7 @@ replicateFor :: [a] -> Int -> [a]
 replicateFor [] _ = []
 replicateFor _ 0 = []
 replicateFor xs 1 = xs
-replicateFor (x:xs) n = x:replicateFor [x] (n-1) ++ replicateFor xs n
+replicateFor (x:xs) n = x : replicateFor [x] (n-1) ++ replicateFor xs n
 
 -- 1.16 (**) Drop every N'th element from a list.
 --    Example:
@@ -157,3 +157,16 @@ dropNth xs n = dropNth' xs n
         dropNth' [] _ = []
         dropNth' (x:xs) 1 = dropNth' xs n
         dropNth' (x:xs) n = x : dropNth' xs (n-1) 
+
+-- 1.17 (*) Split a list into two parts; the length of the first part is given.
+--    Do not use any predefined predicates.
+--    Example:
+--    ?- split([a,b,c,d,e,f,g,h,i,k],3,L1,L2).
+--    L1 = [a,b,c]
+--    L2 = [d,e,f,g,h,i,k]
+splitList :: [a] -> Int -> ([a], [a])
+splitList ys n = splitList' [] ys n
+    where
+        splitList' xs [] _ = (xs, [])
+        splitList' xs ys 0 = (xs, ys)
+        splitList' xs (y:ys) n = splitList' (xs ++ [y]) ys (n-1)
