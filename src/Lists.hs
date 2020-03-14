@@ -146,3 +146,14 @@ replicateFor [] _ = []
 replicateFor _ 0 = []
 replicateFor xs 1 = xs
 replicateFor (x:xs) n = x:replicateFor [x] (n-1) ++ replicateFor xs n
+
+-- 1.16 (**) Drop every N'th element from a list.
+--    Example:
+--    ?- drop([a,b,c,d,e,f,g,h,i,k],3,X).
+--    X = [a,b,d,e,g,h,k]
+dropNth :: [a] -> Int -> [a]
+dropNth xs n = dropNth' xs n
+    where 
+        dropNth' [] _ = []
+        dropNth' (x:xs) 1 = dropNth' xs n
+        dropNth' (x:xs) n = x : dropNth' xs (n-1) 
