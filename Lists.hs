@@ -119,3 +119,30 @@ map' f (x:xs) = f x : map' f xs
 replicate' :: (Int, a) -> [a]
 replicate' (0, _) = []
 replicate' (n, x) = x : replicate' (n-1, x) 
+
+-- TODO
+-- 1.13 (**) Run-length encoding of a list (direct solution).
+--    Implement the so-called run-length encoding data compression method directly. I.e. don't explicitly create the sublists containing the duplicates, as in problem 1.09, but only count them. As in problem 1.11, simplify the result list by replacing the singleton terms [1,X] by X.
+--    Example:
+--    ?- encode_direct([a,a,a,a,b,c,c,a,a,d,e,e,e,e],X).
+--    X = [[4,a],b,[2,c],[2,a],d,[4,e]]
+
+-- 1.14 (*) Duplicate the elements of a list.
+--    Example:
+--    ?- dupli([a,b,c,c,d],X).
+--    X = [a,a,b,b,c,c,c,c,d,d]
+duplicate :: [a] -> [a]
+duplicate [] = []
+duplicate (x:xs) = x:x:duplicate xs
+
+-- 1.15 (**) Duplicate the elements of a list a given number of times.
+--    Example:
+--    ?- dupli([a,b,c],3,X).
+--    X = [a,a,a,b,b,b,c,c,c]
+--    What are the results of the goal:
+--    ?- dupli(X,3,Y).
+replicateFor :: [a] -> Int -> [a]
+replicateFor [] _ = []
+replicateFor _ 0 = []
+replicateFor xs 1 = xs
+replicateFor (x:xs) n = x:replicateFor [x] (n-1) ++ replicateFor xs n
