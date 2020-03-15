@@ -170,3 +170,15 @@ splitList ys n = splitList' [] ys n
         splitList' xs [] _ = (xs, [])
         splitList' xs ys 0 = (xs, ys)
         splitList' xs (y:ys) n = splitList' (xs ++ [y]) ys (n-1)
+
+-- 1.18 (**) Extract a slice from a list.
+--    Given two indices, I and K, the slice is the list containing the elements between the I'th and K'th element of the original list (both limits included). Start counting the elements with 1.
+--    Example:
+--    ?- slice([a,b,c,d,e,f,g,h,i,k],3,7,L).
+--     L = [c,d,e,f,g]
+getSlice :: [a] -> Int -> Int -> [a]
+getSlice [] _ _ = []
+getSlice xs 0 _ = []
+getSlice xs _ 0 = []
+getSlice (x:xs) 1 t = x: getSlice xs 1 (t-1)
+getSlice (x:xs) f t = getSlice xs (f-1) (t-1)
