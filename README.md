@@ -1,4 +1,4 @@
-# 99Problems_Haskell
+# 99Problems solved with Haskell
 
 Solution to [99 Problems](https://sites.google.com/site/prologsite/prolog-problems) in Haskell. Following is the list of problem catagories. Originally, the problmes were defined for Prolog. I have copy-pasted the problem before each solution as it is described on the original site.
 
