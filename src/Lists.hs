@@ -198,3 +198,14 @@ rotateList xs n = l2 ++ l1
         splitAt xs n 
             | n < 0 = numOfElements xs + n
             | otherwise = n
+
+-- 1.20 (*) Remove the K'th element from a list.
+--    Example:
+--    ?- remove_at(X,[a,b,c,d],2,R).
+--    X = b
+--    R = [a,c,d]
+removeKth :: [a] -> Int -> [a]
+removeKth [] _ = []
+removeKth xs 0 = xs
+removeKth (x:xs) 1 = xs
+removeKth (x:xs) k = x : removeKth xs (k-1)
