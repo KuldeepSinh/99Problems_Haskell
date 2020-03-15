@@ -190,3 +190,11 @@ getSlice (x:xs) f t = getSlice xs (f-1) (t-1)
 --    ?- rotate([a,b,c,d,e,f,g,h],-2,X).
 --    X = [g,h,a,b,c,d,e,f]
 --    Hint: Use the predefined predicates length/2 and append/3, as well as the result of problem 1.17.
+rotateList :: [a] -> Int -> [a]
+rotateList xs n = l2 ++ l1
+    where 
+        (l1, l2) = splitList xs (splitAt xs n)
+        splitAt :: [a] -> Int -> Int
+        splitAt xs n 
+            | n < 0 = numOfElements xs + n
+            | otherwise = n
