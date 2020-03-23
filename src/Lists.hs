@@ -2,7 +2,7 @@ module Lists
 () where
 
 import System.Random
-
+import Data.List
 
 -- A list is either empty or it is composed of a first element (head) and a tail, which is a list itself.
 
@@ -239,10 +239,10 @@ createRange n1 n2
 --     ?- rnd_select([a,b,c,d,e,f,g,h],3,L).
 --     L = [e,d,a]
 --     Hint: Use the built-in random number generator random/2 and the result of problem 1.20.
-rnd_select :: [a] -> Int -> IO [a]
+rnd_select :: (Eq a) => [a] -> Int -> IO [a]
 rnd_select xs n = do
     gen <- getStdGen
-    return $ take n [xs !! i | i <- randomRs(0, length xs) gen]
+    return $ take n $ [xs !! i | i <- randomRs(0, length xs) gen]
 
 -- 1.24 (*) Lotto: Draw N different random numbers from the set 1..M.
 --     The selected numbers shall be put into a result list.
@@ -253,12 +253,14 @@ rnd_select xs n = do
 lotto :: Int -> Int -> IO [Int]
 lotto n m = do
     gen <- getStdGen
-    return $ take n (randomRs (1, m) gen)
+    return $ take n $ (randomRs (1, m) gen)
+    
 -- 1.25 (*) Generate a random permutation of the elements of a list.
 --     Example:
 --     ?- rnd_permu([a,b,c,d,e,f],L).
 --     L = [b,a,d,c,e,f]
 --     Hint: Use the solution of problem 1.23.
+rnd_permu xs = rnd_select xs (length xs)
 
 -- 1.26 (**) Generate the combinations of K distinct objects chosen from the N elements of a list
 --     In how many ways can a committee of 3 be chosen from a group of 12 people? We all know that there are C(12,3) = 220 possibilities (C(N,K) denotes the well-known binomial coefficients). For pure mathematicians, this result may be great. But we want to really generate all the possibilities (via backtracking).
