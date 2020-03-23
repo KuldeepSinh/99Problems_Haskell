@@ -270,7 +270,9 @@ rnd_permu xs = rnd_select xs (length xs)
 --     L = [a,b,d] ;
 --     L = [a,b,e] ;
 --     ...
-
+combinations :: Int -> [a] -> [[a]]
+combinations 0 _ = [[]]
+combinations n xs = [y:ys | y:xs' <- tails xs, ys <- combinations (n-1) xs']
 -- 1.27 (**) Group the elements of a set into disjoint subsets.
 --     a) In how many ways can a group of 9 people work in 3 disjoint subgroups of 2, 3 and 4 persons? Write a predicate that generates all the possibilities via backtracking.
 --     Example:
