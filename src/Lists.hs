@@ -1,6 +1,9 @@
 module Lists
 () where
 
+import System.Random
+
+
 -- A list is either empty or it is composed of a first element (head) and a tail, which is a list itself.
 
 
@@ -236,7 +239,10 @@ createRange n1 n2
 --     ?- rnd_select([a,b,c,d,e,f,g,h],3,L).
 --     L = [e,d,a]
 --     Hint: Use the built-in random number generator random/2 and the result of problem 1.20.
-
+rnd_select :: [a] -> Int -> IO [a]
+rnd_select xs n = do
+    gen <- getStdGen
+    return $ take n [xs !! i | i <- randomRs(0, length xs) gen]
 -- 1.24 (*) Lotto: Draw N different random numbers from the set 1..M.
 --     The selected numbers shall be put into a result list.
 --     Example:
