@@ -243,13 +243,17 @@ rnd_select :: [a] -> Int -> IO [a]
 rnd_select xs n = do
     gen <- getStdGen
     return $ take n [xs !! i | i <- randomRs(0, length xs) gen]
+
 -- 1.24 (*) Lotto: Draw N different random numbers from the set 1..M.
 --     The selected numbers shall be put into a result list.
 --     Example:
 --     ?- lotto(6,49,L).
 --     L = [23,1,17,33,21,37]
 --     Hint: Combine the solutions of problems 1.22 and 1.23.
-
+lotto :: Int -> Int -> IO [Int]
+lotto n m = do
+    gen <- getStdGen
+    return $ take n (randomRs (1, m) gen)
 -- 1.25 (*) Generate a random permutation of the elements of a list.
 --     Example:
 --     ?- rnd_permu([a,b,c,d,e,f],L).
